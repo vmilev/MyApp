@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CCT.Desktop.Infrastructure;
+using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Prism.Mvvm.Interfaces;
+using Microsoft.Practices.Unity;
 using System.Windows;
+using System.Windows.Navigation;
 
 namespace MyApp.Desktop
 {
@@ -13,6 +12,26 @@ namespace MyApp.Desktop
     /// </summary>
     public partial class App : Application
     {
-        
+        private static readonly IUnityContainer Container = new UnityContainer();
+        public static INavigationService NavigationService { get; private set; }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            this.ConfigureUnityContainer();
+            ViewModelLocationProvider.SetDefaultViewModelFactory((type) => Container.Resolve(type));
+
+            base.OnStartup(e);
+        }
+
+        private void ConfigureUnityContainer()
+        {
+        }
+
+        internal static void InitializeNavigationService(NavigationService service)
+        {
+            NavigationService = new SimpleNavigationService(service);
+
+            Container.RegisterInstance<INavigationService>(NavigationService);
+        }
     }
 }

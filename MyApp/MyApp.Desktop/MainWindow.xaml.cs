@@ -23,6 +23,9 @@ namespace MyApp.Desktop
         public MainWindow()
         {
             InitializeComponent();
+
+            App.InitializeNavigationService(navigationFrame.NavigationService);
+            App.NavigationService.Navigate("MainPage", null);
         }
     }
 }

@@ -12,5 +12,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructure\PageBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructure\ViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SecondPageViewModel.cs" />
   </ItemGroup>
 </Project>
