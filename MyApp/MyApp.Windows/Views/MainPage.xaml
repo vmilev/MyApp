@@ -6,6 +6,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MyApp.Views"
+    xmlns:controls="using:MyApp.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -15,6 +16,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        <controls:MyTemplatedControl Background="Red" Width="100" Height="100" />
         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Content="{Binding Title}" />
         <Button Grid.Row="1" Content="Navigate Away" Command="{Binding NavigateAway}" />
     </Grid>

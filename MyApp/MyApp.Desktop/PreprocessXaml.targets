@@ -1,0 +1,34 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!--
+    Insert the following code into your project file:
+    
+    <Import Project="PreprocessXaml.targets" />
+  -->
+
+  <PropertyGroup>
+    <MarkupCompilePass1DependsOn>
+      $(MarkupCompilePass1DependsOn)
+      PreprocessXaml;
+    </MarkupCompilePass1DependsOn>
+  </PropertyGroup>
+
+  <Target Name="PreprocessXaml">
+
+    <!-- Run the preprocessor on every page that is added to the project as link. The processed file will be saved at the link position. -->
+    <Exec Condition="('%(Page.Link)' != '')" Command="XamlPreprocessor.exe &quot;%(Page.FullPath)&quot; &quot;%(Page.Link)&quot;"/>
+
+    <ItemGroup>
+
+      <ProcessedPages Include="@(Page->'%(Link)')" />
+
+      <!-- Remove the original (linked) pages so that they are not compiled. -->
+      <Page Remove="@(Page)" Condition="('%(Page.Link)' != '')" />
+
+      <!-- Include the processed pages instead. -->
+      <Page Include="@(ProcessedPages)" />
+
+    </ItemGroup>
+  </Target>
+
+</Project>
